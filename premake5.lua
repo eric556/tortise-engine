@@ -15,9 +15,9 @@ function includeLua()
     includedirs "Libraries/lua/include"
 end
 
-function useECS()
-    includedirs "Projects/ECS"
-    -- links "ECS" -- no need to link a header only lib
+function useTortoise()
+    includedirs "Projects/tortoise"
+    links "tortoise"
 end
 
 function linkSFML()
@@ -82,7 +82,7 @@ function linkLua()
     }
 end
 
-workspace "TortiseEngine"
+workspace "TortoiseEngine"
     location "Projects"
     language "C++"
     architecture "x86_64"
@@ -100,32 +100,25 @@ workspace "TortiseEngine"
     targetdir("Build/Bin/%{prj.name}/%{cfg.longname}")
     objdir("Build/Obj/%{prj.name}/%{cfg.longname}")
 
-project "ECS"
-    location "Projects/ECS"
+project "tortoise"
+    location "Projects/tortoise"
     kind "StaticLib"
-
-    files "Projects/ECS/**.cpp"
-    files "Projects/ECS/**.hpp"
-    files "Projects/ECS/**.h"
-
-    includeLua()
-    linkLua()
-
-    includeSOL2()
+    files "Projects/tortoise/**.cpp"
+    files "Projects/tortoise/**.hpp"
+    files "Projects/tortoise/**.h"
 
 project "DinoRun"
     location "Projects/DinoRun"
     kind "ConsoleApp"
     cppdialect "C++17"
-
     files "Projects/DinoRun/src/**.cpp"
     files "Projects/DinoRun/src/**.h"
     files "Projects/DinoRun/src/**.hpp"
-
     includeSFML()
     linkSFML()
-
     includeIMGUI()
     linkIMGUI()
-    
-    useECS()
+	includeLua()
+    linkLua()
+    includeSOL2()
+    useTortoise()
