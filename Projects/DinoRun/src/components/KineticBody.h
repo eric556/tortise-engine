@@ -1,5 +1,4 @@
 #pragma once
-#include <sol.hpp>
 #include <ecs/Component.hpp>
 
 namespace Components {
