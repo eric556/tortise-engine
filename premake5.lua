@@ -8,8 +8,9 @@ function includeIMGUI()
 end
 
 function includeSOL2()
-    -- includedirs "Libraries/sol2"
-    files "Libraries/sol2/**.hpp"
+    includedirs "Libraries/sol2"
+    -- files "Libraries/sol2/forward.hpp"
+    -- files "Libraries/sol2/sol.hpp"
 end
 
 function includeLua()
@@ -104,6 +105,7 @@ workspace "TortoiseEngine"
 project "tortoise"
     location "Projects/tortoise"
     kind "StaticLib"
+    cppdialect "C++17"
     files "Projects/tortoise/**.cpp"
     files "Projects/tortoise/**.hpp"
     files "Projects/tortoise/**.h"
@@ -122,5 +124,28 @@ project "DinoRun"
     files "Projects/DinoRun/src/**.cpp"
     files "Projects/DinoRun/src/**.h"
     files "Projects/DinoRun/src/**.hpp"
+    includeSFML()
+    linkSFML()      -- lib
+    includeIMGUI()
+    linkIMGUI()     -- inlcuding cpp
+	includeLua()
+    linkLua()       -- lib
+    includeSOL2()   -- Just .hpp
+    useTortoise()
+
+project "PokeTest"
+    location "Projects/PokeTest"
+    kind "ConsoleApp"
+    cppdialect "C++17"
+    files "Projects/PokeTest/src/**.cpp"
+    files "Projects/PokeTest/src/**.h"
+    files "Projects/PokeTest/src/**.hpp"
+    files "Projects/PokeTest/Assets/**.lua"
+    includeSFML()
+    linkSFML()      -- lib
+    includeIMGUI()
+    linkIMGUI()     -- inlcuding cpp
+	includeLua()
+    linkLua()       -- lib
     includeSOL2()   -- Just .hpp
     useTortoise()
